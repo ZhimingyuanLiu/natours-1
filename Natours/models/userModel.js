@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
 	}
 })
 
+//* HASHING
 userSchema.pre('save', async function(next) {
 	// If the password was actually modified
 	if (!this.isModified('password')) return next()
