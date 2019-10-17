@@ -10,7 +10,7 @@ const db = process.env.DATABASE
 const DB = db.replace('<PASSWORD>', pwd)
 
 // READ JSON FILE
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours-simple.json`, 'utf-8'))
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'))
 
 // IMPORT DATA INTO DB
 const importData = async () => {
