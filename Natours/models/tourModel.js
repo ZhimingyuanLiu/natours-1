@@ -122,6 +122,13 @@ tourSchema.virtual('durationWeeks').get(function() {
 	if (this.duration) return this.duration / 7
 })
 
+// Virtual populate (basically child referencing but without persisting it in the database)
+tourSchema.virtual('reviews', {
+	ref: 'Review',
+	foreignField: 'tour',
+	localField: '_id'
+})
+
 //* DOCUMENT MIDDLEWARE: runs before .save() and .create()
 tourSchema.pre('save', function(next) {
 	this.slug = slugify(this.name, { lower: true })
@@ -129,7 +136,7 @@ tourSchema.pre('save', function(next) {
 })
 
 //* QUERY MIDDLEWARE */
-///? ^find/ === all strings that starts with find (regular exoressiob)
+///? ^find/ === all strings that starts with find (regular expression)
 tourSchema.pre(/^find/, function(next) {
 	this.find({ secretTour: { $ne: true } })
 	this.start = Date.now()

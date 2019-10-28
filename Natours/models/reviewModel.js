@@ -35,10 +35,8 @@ const reviewSchema = new mongoose.Schema(
 
 //* QUERY MIDDLEWARE */
 reviewSchema.pre(/^find/, function(next) {
+	// Does another query to the id stored in path and stores the data in the path property
 	this.populate({
-		path: 'tour',
-		select: '-guides name'
-	}).populate({
 		path: 'user',
 		select: 'name photo'
 	})
