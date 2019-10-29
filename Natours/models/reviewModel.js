@@ -34,6 +34,8 @@ const reviewSchema = new mongoose.Schema(
 	}
 )
 
+reviewSchema.index({ tour: 1, user: 1 }, { unique: true })
+
 //* QUERY MIDDLEWARE */
 reviewSchema.pre(/^find/, function(next) {
 	// Does another query to the id stored in path and stores the data in the path property
