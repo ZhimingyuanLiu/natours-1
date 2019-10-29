@@ -61,7 +61,10 @@ app.use((req, res, next) => {
 
 //* 2) MOUNTING ROUTERS
 app.get('/', (req, res) => {
-	res.status(200).render('base')
+	res.status(200).render('base', {
+		tour: 'The Forest Hiker',
+		user: 'Lasse'
+	})
 })
 
 app.use('/api/v1/tours', tourRouter)
