@@ -1,4 +1,5 @@
 config.env
+.cache
 
 # Logs
 logs
