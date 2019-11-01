@@ -8907,6 +8907,7 @@ if (userPasswordForm) {
               }, 'password');
 
             case 7:
+              // Reset
               document.getElementById('password-current').value = '';
               document.getElementById('password').value = '';
               document.getElementById('password-confirm').value = '';
@@ -8953,7 +8954,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59579" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60985" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -16,7 +16,13 @@ router
 router
 	.route('/:id')
 	.get(tourController.getTour)
-	.patch(authController.protect, authController.restrictTo('admin', 'lead-guide'), tourController.updateTour)
+	.patch(
+		authController.protect,
+		authController.restrictTo('admin', 'lead-guide'),
+		tourController.uploadeTourImages,
+		tourController.resizeTourImages,
+		tourController.updateTour
+	)
 	.delete(authController.protect, authController.restrictTo('admin', 'lead-guide'), tourController.deleteTour)
 
 router.route('/top-5-cheap').get(tourController.aliasTopToursCheap, tourController.getAllTours)
