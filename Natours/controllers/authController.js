@@ -81,7 +81,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 	let token
 	if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
 		token = req.headers.authorization.split(' ')[1]
-	} else if (req.cookies.jwt) {
+	} else if (req.cookies.jwt && req.cookies.jwt !== 'loggedout') {
 		token = req.cookies.jwt
 	}
 
@@ -134,7 +134,7 @@ exports.isLoggedIn = async (req, res, next) => {
 }
 
 exports.logout = (req, res) => {
-	res.cookie('jwt', 'logged ouuut', {
+	res.cookie('jwt', 'loggedout', {
 		expires: new Date(Date.now() + 10 * 1000),
 		httpOnly: true
 	})

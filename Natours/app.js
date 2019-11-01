@@ -42,6 +42,7 @@ app.use('/api', limiter)
 
 // Body parser, reading data drom body into req.body
 app.use(express.json({ limit: '10kb' }))
+// app.use(express.urlencoded({ extended: true, limit: '10kb' })) // only needed form-submit (with action and method)
 app.use(cookieParser())
 
 // Data sanitization against NoSQL query injection
@@ -59,7 +60,6 @@ app.use(
 
 // "Test" middleware
 app.use((req, res, next) => {
-	console.log(req.cookies)
 	next()
 })
 

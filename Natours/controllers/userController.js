@@ -7,7 +7,7 @@ const factory = require('./handlerFactory')
 const filterObj = (obj, ...alllowedFields) => {
 	const newObj = {}
 
-	// Loop throw an object
+	// Loops throw an object
 	Object.keys(obj).forEach(el => {
 		if (alllowedFields.includes(el)) newObj[el] = obj[el]
 	})
