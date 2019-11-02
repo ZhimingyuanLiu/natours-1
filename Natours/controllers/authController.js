@@ -15,14 +15,11 @@ const signToken = id => {
 const createSendToken = (user, showUserData, res, statusCode, req) => {
 	const token = signToken(user._id)
 
-	const cookieOptions = {
+	res.cookie('jwt', token, {
 		expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000), // convert to milliseconds (was days before)
-		httpOnly: true // Cannot be accessed or modified
-	}
-
-	if (process.env.NODE_ENV === 'production') cookieOptions.secure = true // Will only be send on encrypted connection (https)
-
-	res.cookie('jwt', token, cookieOptions)
+		httpOnly: true, // Cannot be accessed or modified
+		secure: req.secure || req.headers['x-forwarded-proto'] === 'https' // Will only be send on encrypted connection (https)
+	})
 
 	if (showUserData) {
 		res.status(statusCode).json({
