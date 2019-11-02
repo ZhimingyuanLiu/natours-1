@@ -40,3 +40,11 @@ process.on('unhandledRejection', err => {
 		process.exit(1)
 	})
 })
+
+//? Heroku triggers this event once a day.
+process.on('SIGTERM', () => {
+	console.log('SIGTERM RECEIVED. Shutting down gracefully 👋')
+	server.close(() => {
+		console.log('🔥 Process terminated!')
+	})
+})
