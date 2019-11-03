@@ -1,14 +1,14 @@
 /* eslint-disable */
 
 export const displayMap = locations => {
-	mapboxgl.accessToken = 'pk.eyJ1IjoiY29keHIwMiIsImEiOiJjazJkcHN2dXYwMThiM2Nxa3VwNGkyYnd3In0.VEaMG0IJVK94--I--li0vQ'
+	mapboxgl.accessToken = 'pk.eyJ1IjoiY29keHIwMiIsImEiOiJjazJqODFsZDIxMnIxM2NwY2ZjaXdudnphIn0.9NR--7yL82eW30NvXRFw1A'
 
 	var map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/codxr02/ck2c9v6o90a4j1cr91qxcjg69',
+		style: 'mapbox://styles/codxr02/ck2j8afxs3koj1co5qy1f8smu',
 		scrollZoom: false
-		// center: [-118.113491, 34.111745],
-		// zoom: 4,
+		// center: [-118.11349, 34.111745],
+		// zoom: 10,
 		// interactive: false
 	})
 
@@ -27,13 +27,13 @@ export const displayMap = locations => {
 			.setLngLat(loc.coordinates)
 			.addTo(map)
 
-		/* // Add popup
+		// Add popup
 		new mapboxgl.Popup({
 			offset: 30
 		})
 			.setLngLat(loc.coordinates)
 			.setHTML(`<p>Day ${loc.day}: ${loc.description}</p>`)
-			.addTo(map) */
+			.addTo(map)
 
 		// Extend map bounds to include current location
 		bounds.extend(loc.coordinates)
@@ -41,7 +41,7 @@ export const displayMap = locations => {
 
 	map.fitBounds(bounds, {
 		padding: {
-			top: 120,
+			top: 200,
 			bottom: 150,
 			left: 100,
 			right: 100
