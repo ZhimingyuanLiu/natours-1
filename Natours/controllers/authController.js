@@ -76,7 +76,7 @@ exports.login = catchAsync(async (req, res, next) => {
 	}
 
 	//* 3) If everything is ok, send token to client
-	createSendToken(user, false, res, 200)
+	createSendToken(user, false, res, 200, req)
 })
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -167,7 +167,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 	//* 3) Send the token to the user's email
 	try {
-		const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`
+		const resetURL = `${req.protocol}://${req.get('host')}/resetPassword/${resetToken}`
 
 		await new Email(user, resetURL).sendPasswordReset()
 
@@ -212,8 +212,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 	// Save document
 	await user.save()
 
-	//* 3) Log the user in, send JWT
-	createSendToken(user, false, res, 200)
+	res.status(200).json({
+		status: 'success'
+	})
 })
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -232,5 +233,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 	await user.save()
 
 	//* 4) Log user in, send JWT
-	createSendToken(user, false, res, 200)
+	createSendToken(user, false, res, 200, req)
 })

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import '@babel/polyfill'
 import { displayMap } from './mapbox'
-import { login, logout, register } from './auth'
+import { login, logout, register, forgotPassword, resetPassword } from './auth'
 import { updateSettings } from './updateSettings'
 import { bookTour } from './stripe'
 
@@ -12,6 +12,8 @@ const registerForm = document.querySelector('.form--register')
 const logoutButton = document.querySelector('.nav__el--logout')
 const userDataForm = document.querySelector('.form-user-data')
 const userPasswordForm = document.querySelector('.form-user-password')
+const forgotPasswordForm = document.querySelector('.form--forgotPassword')
+const resetPasswordForm = document.querySelector('.form--resetPassword')
 const bookBtn = document.getElementById('book-tour')
 
 //* DELEGATION
@@ -74,6 +76,28 @@ if (userPasswordForm) {
 		document.getElementById('password').value = ''
 		document.getElementById('password-confirm').value = ''
 		document.querySelector('.btn--save--password').textContent = 'Save password'
+	})
+}
+
+if (forgotPasswordForm) {
+	forgotPasswordForm.addEventListener('submit', e => {
+		e.preventDefault()
+
+		const email = document.getElementById('email').value
+
+		forgotPassword(email)
+	})
+}
+
+if (resetPasswordForm) {
+	resetPasswordForm.addEventListener('submit', e => {
+		e.preventDefault()
+
+		const token = document.getElementById('resetPasswordToken').dataset.token
+		const password = document.getElementById('password').value
+		const passwordConfirm = document.getElementById('passwordConfirm').value
+
+		resetPassword(token, password, passwordConfirm)
 	})
 }
 
